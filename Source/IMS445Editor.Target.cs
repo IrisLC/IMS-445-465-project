@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class IMS445EditorTarget : TargetRules
 {
-	public IMS445EditorTarget(TargetInfo Target) : base(Target)
+	public IMS445EditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
