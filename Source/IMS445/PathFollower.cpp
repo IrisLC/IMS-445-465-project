@@ -35,6 +35,9 @@ void APathFollower::BeginPlay()
 
 		}
 	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("2"));
+	}
 }
 
 // Called every frame
