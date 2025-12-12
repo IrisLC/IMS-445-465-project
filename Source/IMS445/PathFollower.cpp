@@ -23,6 +23,8 @@ APathFollower::APathFollower()
 void APathFollower::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CanMove = false;
 	
 	if (SplineHolder != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("1"));
@@ -46,13 +48,18 @@ void APathFollower::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	if (Spline != nullptr) {
+		if (CanMove) {
+			DistanceTraveled += Speed * DeltaTime;
 
-		DistanceTraveled += Speed * DeltaTime;
+			FVector location = Spline->GetLocationAtDistanceAlongSpline(DistanceTraveled, ESplineCoordinateSpace::World);
+			FRotator rotation = Spline->GetRotationAtDistanceAlongSpline(DistanceTraveled, ESplineCoordinateSpace::World);
 
-		FVector location = Spline->GetLocationAtDistanceAlongSpline(DistanceTraveled, ESplineCoordinateSpace::World);
-		FRotator rotation = Spline->GetRotationAtDistanceAlongSpline(DistanceTraveled, ESplineCoordinateSpace::World);
-
-		SetActorLocationAndRotation(location, rotation);
+			if (Spline->GetSplineLength() <= DistanceTraveled) {
+				isDone = true;
+			}
+			SetActorLocationAndRotation(location, rotation);
+		}
+		
 
 	}
 }

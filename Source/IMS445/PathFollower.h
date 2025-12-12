@@ -25,6 +25,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline")
 	AActor* SplineHolder;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool CanMove;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool isDone;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
